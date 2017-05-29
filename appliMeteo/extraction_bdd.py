@@ -8,12 +8,9 @@ Created on Mon May 29 08:44:28 2017
 import sqlite3
 
 
-#connection à la bdd
-conn = sqlite3.connect('base_temperature.sqlite') 
-
 
 def get_data(id_station):
-    
+    conn = sqlite3.connect('base_temperature.sqlite') 
     c=conn.cursor()
     date=[]
     tp=[]
@@ -24,11 +21,12 @@ def get_data(id_station):
         date.append(line[0])
         tp.append(line[1])
         q_tp.append(line[2])
-        
+    
+    conn.close()
     return date,tp,q_tp
     
 def get_station():
-    
+    conn = sqlite3.connect('base_temperature.sqlite') 
     c=conn.cursor()
     
     id_station=[]
@@ -43,7 +41,7 @@ def get_station():
         lat.append(min_to_dec(line[2]))
         lon.append(min_to_dec(line[3]))
         alt.append(line[4])
-        
+    conn.close()   
     return id_station,nom,lat,lon,alt
     
 def min_to_dec(a):
