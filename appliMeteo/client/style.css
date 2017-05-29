@@ -3,6 +3,7 @@
   font-family: 'Trebuchet MS';
   padding: 2em;
   height:100%;
+  width:100%;
 }
 table {
   border-collapse: collapse;
@@ -61,3 +62,8 @@ a.delete:hover {
   color: red;
 }
 #map { height: 500px; width: 680px;}
+
+[content=true]:not:empty:before{
+    display: none;
+    height:100%;
+    width:100%;}
