@@ -37,17 +37,18 @@ def get_station():
     lon=[]
     alt=[]
     
-    for line in c.execute("""SELECT * FROM stations_meteos"""):
+    for line in c.execute("""SELECT * FROM stations_meteo"""):
         id_station.append(line[0])
         nom.append(line[1])
-        lat.append(line[2])
-        lon.append(line[3])
-        alt.append(line[3])
+        lat.append(min_to_dec(line[2]))
+        lon.append(min_to_dec(line[3]))
+        alt.append(line[4])
         
     return id_station,nom,lat,lon,alt
     
 def min_to_dec(a):
-    return None
+    [deg,minu,sec]=a.split(':')
+    return int(deg)+int(minu)/60+int(sec)/3600
         
 def moyenne_annee(date,tp,q_tp):
     
@@ -79,6 +80,4 @@ def moyenne_annee(date,tp,q_tp):
 
 #date,tp,q_tp=get_data(742)    
 #print(moyenne_annee(date,tp,q_tp))    
-        
- #coupe la connection
-print(get_station())
+     
