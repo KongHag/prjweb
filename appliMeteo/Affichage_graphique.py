@@ -35,15 +35,12 @@ def genere_graphe(date,tp,nom='temperature.png'):
         plt.savefig('client/graphes/'+nom)
         return True
 
-""" 
-id_stat = 33
-data=get_data(id_stat)
+def genere_graphe_id(i):
+    id_stat = i
+    data=get_data(id_stat)
+    date,tp = moyenne_annee(data[0],data[1],data[2])
+    genere_graphe(date,tp)
 
-date,tp = moyenne_annee(data[0],data[1],data[2])
-
-
-genere_graphe(date,tp)
-"""
 
 
 
