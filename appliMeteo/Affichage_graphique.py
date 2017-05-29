@@ -15,7 +15,6 @@ def genere_graphe(date,tp,nom='graphe.png'):
         return False;
     else:
         fig, ax = plt.subplots()
-        #ax.xaxis.set_major_formatter(yearsFmt)
                 
         datemin = min(date)
         datemax = max(date)
