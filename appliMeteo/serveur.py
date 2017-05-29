@@ -36,6 +36,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     elif self.path_info[0] == "description":
       
       genere_graphe_id(int(self.path_info[1]))
+      self.send_json("caca")
 
     # requête générique
     elif self.path_info[0] == "service":
