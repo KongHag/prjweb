@@ -22,7 +22,7 @@ def get_data(id_station):
         tp.append(line[1])
         q_tp.append(line[2])
         nom_complet = line[3]
-    nom = ''
+    nom =''
     i = 0
     while (i<len(nom_complet) and nom_complet[i] != ' '):
         nom += nom_complet[i]
@@ -33,7 +33,7 @@ def get_data(id_station):
 def get_station():
     conn = sqlite3.connect('base_temperature.sqlite') 
     c=conn.cursor()
-    
+    c2=conn.cursor()
     id_station=[]
     nom=[]
     lat=[]
@@ -41,11 +41,15 @@ def get_station():
     alt=[]
     
     for line in c.execute("""SELECT * FROM stations_meteo"""):
-        id_station.append(line[0])
-        nom.append(line[1])
-        lat.append(min_to_dec(line[2]))
-        lon.append(min_to_dec(line[3]))
-        alt.append(line[4])
+        for test in c2.execute("""SELECT COUNT(date) FROM temperatures WHERE id={}""".format(line[0])):
+            True
+        
+        if test[0]>0:
+            id_station.append(line[0])
+            nom.append(line[1])
+            lat.append(min_to_dec(line[2]))
+            lon.append(min_to_dec(line[3]))
+            alt.append(line[4])
     conn.close()   
     return id_station,nom,lat,lon,alt
     
