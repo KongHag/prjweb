@@ -6,7 +6,7 @@ import http.server
 import socketserver
 from urllib.parse import urlparse, parse_qs
 import json
-import sqlite3
+from extraction_bdd import *
 
 # définition du handler
 class RequestHandler(http.server.SimpleHTTPRequestHandler):
@@ -24,9 +24,12 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     # requete location - retourne la liste de lieux et leurs coordonnées géogrpahiques
     if self.path_info[0] == "location":
       
-      data=[{'id':1,'lat':45.76843,'lon':4.82667,'name':"Rue Couverte"},
-            {'id':2,'lat':45.77128,'lon':4.83251,'name':"Rue Caponi"},
-            {'id':3,'lat':45.78061,'lon':4.83196,'name':"Jardin Rosa-Mir"}]
+      id_station,nom,lat,lon,alt=get_station()
+      n=len(id_station)
+      data=[]
+      for i in range(n):
+          data.append({'id':id_station[i],'lat':lat[i],'lon':lon[i],'name':nom[i]})
+      
       self.send_json(data)
 
     # requete description - retourne la description du lieu dont on passe l'id en paramètre dans l'URL
