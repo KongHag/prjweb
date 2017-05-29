@@ -54,8 +54,3 @@ def moyenne_annee(date,tp,q_tp):
     tp_annee.append(current_mean/current_nb)  
      
     return annee,tp_annee
-
-#date,tp,q_tp=get_data(33)    
-#print(moyenne_annee(date,tp,q_tp))    
-        
-  #coupe la connection
