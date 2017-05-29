@@ -27,7 +27,28 @@ def get_data(id_station):
         
     return date,tp,q_tp
     
-
+def get_station():
+    
+    c=conn.cursor()
+    
+    id_station=[]
+    nom=[]
+    lat=[]
+    lon=[]
+    alt=[]
+    
+    for line in c.execute("""SELECT * FROM stations_meteos"""):
+        id_station.append(line[0])
+        nom.append(line[1])
+        lat.append(line[2])
+        lon.append(line[3])
+        alt.append(line[3])
+        
+    return id_station,nom,lat,lon,alt
+    
+def min_to_dec(a):
+    return None
+        
 def moyenne_annee(date,tp,q_tp):
     
     n=len(date)
@@ -60,3 +81,4 @@ def moyenne_annee(date,tp,q_tp):
 #print(moyenne_annee(date,tp,q_tp))    
         
  #coupe la connection
+print(get_station())
