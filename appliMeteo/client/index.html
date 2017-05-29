@@ -32,23 +32,21 @@
   <div class="col-sm-6">
   <div class="container-fluid">
   <div class="well">
-      Description
-      <p id="description"></p>
+      <p id="description">
+        <img src="http://api.eclair.ec-lyon.fr/?type=photo&login=mdesurmo" style="height:75%; width:100%"/>
+      </p>
       </div>
       </div>
   </div>
 </div> 
   <!-- Zone pour l'affichage dynamique des descriptions -->
-<<<<<<< HEAD
-=======
 
->>>>>>> 34e98f517b4bd4d183248fe77047f31dc2ba64fa
  </body>
 </html>
 
 <script>
 // Creation d'une carte dans la balise div "map", et positionne la vue sur un point donné et un niveau de zoom
-var map = L.map('map').setView([46.52863469527167,2.43896484375],6);
+var map = L.map('map').setView([46.52863469527167,2.43896484375],5);
 // Ajout d'une couche de dalles OpenStreetMap
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -78,7 +76,7 @@ function OnMarkerClick (e) {
       // récupération des données renvoyées par le serveur
   	var data = JSON.parse(this.responseText);
   	// affichage dans la zone 'description' du nom (reprise dans le popup) et de la description récupéré par l'appel au serveur
-  	description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() + '</i></b><br>'+ data.desc;
+  	description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() + '</i></b><br>'+ '<img src="/images/graphes/temperature.png" style="height:80% ; width:100%"/>';
     };
   xhr.open('GET','/description/'+e.target.idnum,true);  // on récupère la description du lieu n° idnum par un appel au serveur
   xhr.send();
