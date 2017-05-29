@@ -32,7 +32,7 @@
   <div class="col-sm-6">
   <div class="container-fluid">
   <div class="well">
-      <p id="description" content=true>
+      <p id="description">
         <img src="http://api.eclair.ec-lyon.fr/?type=photo&login=mdesurmo" style="height:75%; width:100%"/>
       </p>
       </div>
@@ -76,7 +76,7 @@ function OnMarkerClick (e) {
       // récupération des données renvoyées par le serveur
       var data = JSON.parse(this.responseText);
   	// affichage dans la zone 'description' du nom (reprise dans le popup) et de la description récupéré par l'appel au serveur
-  	description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() + data.desc + '</i></b><br>'+ //'<img src="/graphes/temperature.png" style="height:80% ; width:100%"/>';
+  	description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() +'<br >'+'</i></b><br>'+'<img src="/graphes/temperature.png" style="height:80% ; width:100%"/>';
     };
   xhr.open('GET','/description/'+e.target.idnum,true);  // on récupère la description du lieu n° idnum par un appel au serveur
   xhr.send();
