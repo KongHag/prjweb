@@ -7,7 +7,7 @@ import socketserver
 from urllib.parse import urlparse, parse_qs
 import json
 from extraction_bdd import *
-from affiche_graphique import *
+from affichage_graphique import *
 # définition du handler
 class RequestHandler(http.server.SimpleHTTPRequestHandler):
 
@@ -35,7 +35,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     # requete description - retourne la description du lieu dont on passe l'id en paramètre dans l'URL
     elif self.path_info[0] == "description":
       
-      genere_graphe_id(int(self.path_info[1])
+      genere_graphe_id(int(self.path_info[1]))
 
     # requête générique
     elif self.path_info[0] == "service":
