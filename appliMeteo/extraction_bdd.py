@@ -8,27 +8,30 @@ Created on Mon May 29 08:44:28 2017
 import sqlite3
 
 
-#connection à la bdd
-conn = sqlite3.connect('base_temperature.sqlite') 
-
 
 def get_data(id_station):
-    
+    conn = sqlite3.connect('base_temperature.sqlite') 
     c=conn.cursor()
     date=[]
     tp=[]
     q_tp=[]
     
     c.execute("""SELECT * FROM temperatures ORDER BY date""")
-    for line in c.execute("""SELECT date,tp,q_tp FROM temperatures WHERE id={}""".format(id_station)):
+    for line in c.execute("""SELECT date,tp,q_tp,nom FROM temperatures JOIN stations_meteo ON temperatures.id = stations_meteo.id WHERE temperatures.id={}""".format(id_station)):
         date.append(line[0])
         tp.append(line[1])
         q_tp.append(line[2])
-        
-    return date,tp,q_tp
+        nom_complet = line[3]
+    nom = ''
+    i = 0
+    while (i<len(nom_complet) and nom_complet[i] != ' '):
+        nom += nom_complet[i]
+        i += 1
+    conn.close()
+    return date,tp,q_tp,nom
     
 def get_station():
-    
+    conn = sqlite3.connect('base_temperature.sqlite') 
     c=conn.cursor()
     
     id_station=[]
@@ -37,18 +40,21 @@ def get_station():
     lon=[]
     alt=[]
     
-    for line in c.execute("""SELECT * FROM stations_meteos"""):
+    for line in c.execute("""SELECT * FROM stations_meteo"""):
         id_station.append(line[0])
         nom.append(line[1])
-        lat.append(line[2])
-        lon.append(line[3])
-        alt.append(line[3])
-        
+        lat.append(min_to_dec(line[2]))
+        lon.append(min_to_dec(line[3]))
+        alt.append(line[4])
+    conn.close()   
     return id_station,nom,lat,lon,alt
     
 def min_to_dec(a):
-    return None
-        
+    [deg,minu,sec]=a.split(':')
+    if int(deg)>=0:
+        return int(deg)+int(minu)/60+int(sec)/3600
+    else:
+        return int(deg)-int(minu)/60-int(sec)/3600
 def moyenne_annee(date,tp,q_tp):
     
     n=len(date)
@@ -79,6 +85,4 @@ def moyenne_annee(date,tp,q_tp):
 
 #date,tp,q_tp=get_data(742)    
 #print(moyenne_annee(date,tp,q_tp))    
-        
- #coupe la connection
-print(get_station())
+
