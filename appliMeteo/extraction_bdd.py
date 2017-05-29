@@ -46,8 +46,10 @@ def get_station():
     
 def min_to_dec(a):
     [deg,minu,sec]=a.split(':')
-    return int(deg)+int(minu)/60+int(sec)/3600
-        
+    if int(deg)>=0:
+        return int(deg)+int(minu)/60+int(sec)/3600
+    else:
+        return int(deg)-int(minu)/60-int(sec)/3600
 def moyenne_annee(date,tp,q_tp):
     
     n=len(date)
@@ -78,4 +80,4 @@ def moyenne_annee(date,tp,q_tp):
 
 #date,tp,q_tp=get_data(742)    
 #print(moyenne_annee(date,tp,q_tp))    
-     
+
