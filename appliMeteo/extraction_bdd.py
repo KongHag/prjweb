@@ -21,7 +21,12 @@ def get_data(id_station):
         date.append(line[0])
         tp.append(line[1])
         q_tp.append(line[2])
-        nom = line[3]
+        nom_complet = line[3]
+    nom = ''
+    i = 0
+    while (i<len(nom_complet) and nom_complet[i] != ' '):
+        nom += nom_complet[i]
+        i += 1
     conn.close()
     return date,tp,q_tp,nom
     

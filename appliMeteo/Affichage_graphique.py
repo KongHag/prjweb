@@ -45,5 +45,4 @@ def genere_graphe_id(i):
     genere_graphe(date,tp,data[3])
 
 
-genere_graphe_id(33)
 
