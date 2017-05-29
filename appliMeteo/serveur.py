@@ -7,7 +7,7 @@ import socketserver
 from urllib.parse import urlparse, parse_qs
 import json
 from extraction_bdd import *
-from affiche_graphique import *
+from affichage_graphique import *
 # définition du handler
 class RequestHandler(http.server.SimpleHTTPRequestHandler):
 
