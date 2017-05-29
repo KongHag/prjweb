@@ -17,13 +17,13 @@ def get_data(id_station):
     q_tp=[]
     
     c.execute("""SELECT * FROM temperatures ORDER BY date""")
-    for line in c.execute("""SELECT date,tp,q_tp FROM temperatures WHERE id={}""".format(id_station)):
+    for line in c.execute("""SELECT date,tp,q_tp,nom FROM temperatures JOIN stations_meteo ON temperatures.id = stations_meteo.id WHERE temperatures.id={}""".format(id_station)):
         date.append(line[0])
         tp.append(line[1])
         q_tp.append(line[2])
-    
+        nom = line[3]
     conn.close()
-    return date,tp,q_tp
+    return date,tp,q_tp,nom
     
 def get_station():
     conn = sqlite3.connect('base_temperature.sqlite') 
