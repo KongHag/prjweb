@@ -1,0 +1,86 @@
+﻿<DOCTYPE html>  
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="leaflet.js"> // insertion bibliothèque Leaflet : http://leafletjs.com/ </script>
+
+<html>
+ <head>
+  <title>Exemple de carte</title>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+  <link rel="stylesheet" type="text/css" href="leaflet.css" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+ <body onload="load_data();">  <!-- Récupération des données avec le chargement de la page -->
+
+  <div class='well'>
+
+  <h1>Mes lieux libertins à la Croix-Rousse
+  </h1></div>
+ 
+  <!-- Zone pour l'insertion de la carte OSM via Leaflet -->
+   <div class="row">
+  <div class="col-sm-6"> 
+          <div id="map" style="height: 80%; width:100%">
+        </div>
+      </div>
+  <div class="col-sm-6">
+  <div class="container-fluid">
+  <div class="well">
+      Description
+      <p id="description"></p>
+      </div>
+      </div>
+  </div>
+</div> 
+  <!-- Zone pour l'affichage dynamique des descriptions -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> 34e98f517b4bd4d183248fe77047f31dc2ba64fa
+ </body>
+</html>
+
+<script>
+// Creation d'une carte dans la balise div "map", et positionne la vue sur un point donné et un niveau de zoom
+var map = L.map('map').setView([46.52863469527167,2.43896484375],6);
+// Ajout d'une couche de dalles OpenStreetMap
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+     }).addTo(map);
+	 
+function load_data () {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {   // fonction callback
+      // récupération des données renvoyées par le serveur
+  	var data = JSON.parse(this.responseText);
+      // boucle sur les enregistrements renvoyés
+      for ( n = 0; n < data.length; n++ ) {
+      // insertion d'un marqueur à la position, attachement d'une popup, capture de l'évènement "clic'
+  	  L.marker([data[n].lat,data[n].lon]).addTo(map)
+          .bindPopup('Lieu = '+data[n].name)
+  		.addEventListener('click',OnMarkerClick)
+  		.idnum=data[n].id;   // propriété personnalisée ajouté au marqueur
+  	  }
+    };
+  xhr.open('GET','/location',true);
+  xhr.send();
+}
+
+function OnMarkerClick (e) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {   // fonction callback
+      // récupération des données renvoyées par le serveur
+  	var data = JSON.parse(this.responseText);
+  	// affichage dans la zone 'description' du nom (reprise dans le popup) et de la description récupéré par l'appel au serveur
+  	description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() + '</i></b><br>'+ data.desc;
+    };
+  xhr.open('GET','/description/'+e.target.idnum,true);  // on récupère la description du lieu n° idnum par un appel au serveur
+  xhr.send();
+}
+</script>
