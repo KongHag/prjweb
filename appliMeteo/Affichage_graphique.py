@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 from extraction_bdd import *
 
-def genere_graphe(date,tp,nom='graphe.png'):
+def genere_graphe(date,tp,nom='temperature.png'):
     if len(date) != len(tp):
         return False;
     else:
@@ -24,5 +24,26 @@ def genere_graphe(date,tp,nom='graphe.png'):
         datemax = datemax + 0.05*delta
         ax.set_xlim(datemin, datemax)
         
-        plt.savefig(nom)
+        tpmin = min(tp)
+        tpmax = max(tp)
+        deltatp = tpmax-tpmin
+        tpmin = tpmin - 0.05*deltatp
+        tpmax = tpmax + 0.05*deltatp
+        ax.set_ylim(tpmin, tpmax)
+        
+        plt.plot(date,tp)
+        plt.savefig('client/graphes/'+nom)
         return True
+
+""" 
+id_stat = 33
+data=get_data(id_stat)
+
+date,tp = moyenne_annee(data[0],data[1],data[2])
+
+
+genere_graphe(date,tp)
+"""
+
+
+
