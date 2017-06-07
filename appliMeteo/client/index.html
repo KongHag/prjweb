@@ -20,7 +20,7 @@
 
   <div class='well'>
 
-  <h1>Mes plans libertins en France
+  <h1>Mes plans libertins en France #KongLaPute
   </h1></div>
  
   <!-- Zone pour l'insertion de la carte OSM via Leaflet -->
@@ -33,7 +33,7 @@
   <div class="container-fluid">
   <div class="well">
       <p id="description">
-        <img src="http://api.eclair.ec-lyon.fr/?type=photo&login=xkappler" style="height:75%; width:100%"/>
+        <img id ="graphe" style="height:75%; width:100%"/>
       </p>
       </div>
       </div>
@@ -76,7 +76,9 @@ function OnMarkerClick (e) {
       // récupération des données renvoyées par le serveur
       var data = JSON.parse(this.responseText);
   	// affichage dans la zone 'description' du nom (reprise dans le popup) et de la description récupéré par l'appel au serveur
-  	description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() +'<br >'+'</i></b><br>'+'<img src="/graphes/temperature.png" style="height:80% ; width:100%"/>';
+  	// description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() +'<br >'+'</i></b><br>'+'<img src="/graphes/temperature.png" style="height:80% ; width:100%"/>';
+      var graphe = document.getElementById("graphe");
+      graphe.src ="/graphes/temperature.png?"+new Date().getMilliseconds();
     };
   xhr.open('GET','/description/'+e.target.idnum,true);  // on récupère la description du lieu n° idnum par un appel au serveur
   xhr.send();
