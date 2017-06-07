@@ -37,7 +37,10 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
       
       genere_graphe_id(int(self.path_info[1]))
       self.send_json({'desc':"caca"})
-
+    
+    elif self.path_info[]=="personnalise":
+        print(self.path_info[0])
+      
     # requête générique
     elif self.path_info[0] == "service":
       self.send_html('<p>Path info : <code>{}</p><p>Chaîne de requête : <code>{}</code></p>' \
@@ -58,9 +61,13 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
 
     # requête générique
     if self.path_info[0] == "service":
+        
       self.send_html(('<p>Path info : <code>{}</code></p><p>Chaîne de requête : <code>{}</code></p>' \
           + '<p>Corps :</p><pre>{}</pre>').format('/'.join(self.path_info),self.query_string,self.body));
-
+          
+    elif self.path_info[]=="personnalise":
+        genere_graphe_id(int(self.path_info[1]),int(self.params['date_d'][0]),int(self.params['date_f'][0]))
+        self.send_json({'desc':"caca"})
     else:
       self.send_error(405)
 
