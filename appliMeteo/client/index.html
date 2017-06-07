@@ -85,17 +85,3 @@ function OnMarkerClick (e) {
   xhr.send();
 }
 </script>
-
-<script type="text/javascript">
-function refresh() {
-   var tmp = new Date();
-   var img = document.getElementById("graphe");
-   if (typeof img!=="null"||typeof img!=="undefined"){
-   img.src = img.src + '?' + tmp.getTime();
-}}
- 
-window.onload = function() {
-  if (typeof img!=="null"||typeof img!=="undefined"){
-  setInterval(refresh,1000);
- }};
-</script>
