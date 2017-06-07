@@ -79,8 +79,23 @@ function OnMarkerClick (e) {
   	// description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() +'<br >'+'</i></b><br>'+'<img src="/graphes/temperature.png" style="height:80% ; width:100%"/>';
       var graphe = document.getElementById("graphe");
       graphe.src ="/graphes/temperature.png?"+new Date().getMilliseconds();
+
     };
   xhr.open('GET','/description/'+e.target.idnum,true);  // on récupère la description du lieu n° idnum par un appel au serveur
   xhr.send();
 }
+</script>
+
+<script type="text/javascript">
+function refresh() {
+   var tmp = new Date();
+   var img = document.getElementById("graphe");
+   if (typeof img!=="null"||typeof img!=="undefined"){
+   img.src = img.src + '?' + tmp.getTime();
+}}
+ 
+window.onload = function() {
+  if (typeof img!=="null"||typeof img!=="undefined"){
+  setInterval(refresh,1000);
+ }};
 </script>
