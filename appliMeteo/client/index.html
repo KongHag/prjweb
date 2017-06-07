@@ -20,7 +20,7 @@
 
   <div class='well'>
 
-  <h1>Mes plans libertins en France
+  <h1>Mes plans libertins en France #KongLaPute
   </h1></div>
  
   <!-- Zone pour l'insertion de la carte OSM via Leaflet -->
@@ -33,7 +33,15 @@
   <div class="container-fluid">
   <div class="well">
       <p id="description">
+<<<<<<< HEAD
         <img src="http://i.dailymail.co.uk/i/pix/2008/07/02/article-1031081-058986F00000044D-341_468x395.jpg" style="height:75%; width:100%"/>
+=======
+<<<<<<< HEAD
+        <img id ="graphe" style="height:75%; width:100%"/>
+=======
+        <img src="http://api.eclair.ec-lyon.fr/?type=photo&login=dloureir" style="height:75%; width:100%"/>
+>>>>>>> b124e7783a69a1272126ccb48fac58b3c265be55
+>>>>>>> 1a3a041933e961f96b096bf2620824bbba071683
       </p>
       </div>
       </div>
@@ -76,7 +84,13 @@ function OnMarkerClick (e) {
       // récupération des données renvoyées par le serveur
       var data = JSON.parse(this.responseText);
   	// affichage dans la zone 'description' du nom (reprise dans le popup) et de la description récupéré par l'appel au serveur
+<<<<<<< HEAD
   	description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() +'<br >'+'</i></b><br>'+'<img id="graphe" src="/graphes/temperature.png" style="height:80% ; width:100%"/>';
+=======
+  	// description.innerHTML =  '<b><i>' + e.target.getPopup().getContent() +'<br >'+'</i></b><br>'+'<img src="/graphes/temperature.png" style="height:80% ; width:100%"/>';
+      var graphe = document.getElementById("graphe");
+      graphe.src ="/graphes/temperature.png?"+new Date().getMilliseconds();
+>>>>>>> 1a3a041933e961f96b096bf2620824bbba071683
     };
   xhr.open('GET','/description/'+e.target.idnum,true);  // on récupère la description du lieu n° idnum par un appel au serveur
   xhr.send();
